@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
-    <test verbose="2" preserve-order="true" name="C:/Users/User/Documents/GitHub/automation">
-        <classes/>
+    <test verbose="2" name="FBook Automation Testing">
+        <classes>
+            <class name="testcases.FBookTest"></class>
+        </classes>
     </test>
 </suite>
