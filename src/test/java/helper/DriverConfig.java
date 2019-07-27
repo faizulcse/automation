@@ -1,6 +1,7 @@
 package helper;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.*;
@@ -13,11 +14,12 @@ public class DriverConfig {
     public static String CURRENT_DIR = System.getProperty("user.dir");
     public static String CHROME_DRIVER_WINDOWS = CURRENT_DIR + "/driver/chromedriver.exe";
     public static String FIREFOX_DRIVER_WINDOWS = CURRENT_DIR + "/driver/geckodriver.exe";
+    public static JavascriptExecutor js;
+    public static WebDriver driver;
     public static FileInputStream fileInputStream;
     public static Properties props;
-    public static String URL;
     public static String BROWSER;
-    public static WebDriver driver;
+    public static String URL;
 
     @BeforeSuite
     public void beforeSuite(){
@@ -62,6 +64,7 @@ public class DriverConfig {
         if(driver!=null)
         {
             driver.get(URL);
+            js = (JavascriptExecutor) driver;
             driver.manage().window().maximize();
             driver.manage().deleteAllCookies();
         }
