@@ -3,9 +3,10 @@ package helper;
 //import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
 import java.io.FileInputStream;
@@ -18,9 +19,11 @@ public class DriverConfig {
     public static String FIREFOX_DRIVER_WINDOWS = CURRENT_DIR + "/driver/geckodriver.exe";
     public static JavascriptExecutor js;
     public static WebDriver driver;
+    public static WebDriverWait webDriverWait;
     public static FileInputStream fileInputStream;
     public static Properties props;
     public static String BROWSER;
+    public static int wait;
     public static String URL;
 
     @BeforeSuite
@@ -39,6 +42,7 @@ public class DriverConfig {
             props.load(fileInputStream);
             URL = props.getProperty("url");
             BROWSER = props.getProperty("browser");
+            wait = Integer.parseInt(props.getProperty("waitTime"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -67,6 +71,7 @@ public class DriverConfig {
         {
             driver.get(URL);
             js = (JavascriptExecutor) driver;
+            webDriverWait = new WebDriverWait(driver, wait);
 //            Dimension d = new Dimension(521,628);
 //            driver.manage().window().setSize(d);
             driver.manage().window().maximize();
