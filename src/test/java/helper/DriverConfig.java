@@ -3,6 +3,7 @@ package helper;
 //import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -82,6 +83,22 @@ public class DriverConfig {
     @AfterMethod
     public void tearDown() {
         if(driver!=null) driver.quit();
+    }
+
+    public boolean waitUntil(String title){
+       return webDriverWait.until(ExpectedConditions.titleIs(title));
+    }
+
+    public boolean waitUntil(String title, int seconds){
+        return  new WebDriverWait(driver, seconds).until(ExpectedConditions.titleIs(title));
+    }
+
+    public void waitUntil(WebElement webElement){
+        webDriverWait.until(ExpectedConditions.visibilityOf(webElement));
+    }
+
+    public void waitUntil(WebElement webElement, int seconds){
+        new WebDriverWait(driver, seconds).until(ExpectedConditions.visibilityOf(webElement));
     }
 
     public static void scrollUp(){
